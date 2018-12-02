@@ -5,7 +5,7 @@ var player
 
 func _ready():
 	position_label = $Label
-	player = get_node("/root/Root/Player")
+	player = get_node("/root/Main/Player")
 
 func _process(delta):
 	var position = player.global_transform.origin

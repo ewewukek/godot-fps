@@ -4,7 +4,7 @@
 [ext_resource path="res://DevHUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 
-[node name="Root" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 
