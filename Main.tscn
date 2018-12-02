@@ -3,13 +3,13 @@
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://DevHUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://grid.png" type="Texture" id=4]
+[ext_resource path="res://stone_bricks.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 
 render_priority = 0
 flags_transparent = false
-flags_unshaded = false
+flags_unshaded = true
 flags_vertex_lighting = false
 flags_no_depth_test = false
 flags_use_point_size = false
@@ -56,7 +56,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-_sections_unfolded = [ "Albedo", "UV1" ]
+_sections_unfolded = [ "Albedo", "Flags", "UV1" ]
 
 [sub_resource type="PlaneMesh" id=2]
 
