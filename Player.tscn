@@ -11,7 +11,7 @@ height = 1.2
 
 extents = Vector3( 0.18, 0.05, 0.18 )
 
-[node name="Player" type="KinematicBody" index="0"]
+[node name="Player" type="KinematicBody"]
 
 input_ray_pickable = true
 input_capture_on_drag = false

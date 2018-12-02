@@ -66,7 +66,7 @@ size = Vector2( 64, 64 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 
