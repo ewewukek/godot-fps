@@ -9,9 +9,6 @@ func _ready():
 	neck = $Neck
 	camera = $Neck/Camera
 
-	# TODO: move somewhere else
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 func _physics_process(delta):
 	var input_move = Vector3()
 
@@ -23,13 +20,6 @@ func _physics_process(delta):
 		input_move.x -= 1.0
 	if Input.is_action_pressed("move_right"):
 		input_move.x += 1.0
-
-	# TODO: move somewhere else
-	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	if input_move.length() > 0:
 		input_move = input_move.normalized()
