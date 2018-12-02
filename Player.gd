@@ -1,6 +1,7 @@
 extends KinematicBody
 
-var MOUSE_SENSITIVITY = 0.05
+var MOUSE_SENSITIVITY = deg2rad(0.12)
+var CAMERA_PITCH_LIMIT = deg2rad(90)
 
 var camera
 var neck
@@ -27,10 +28,6 @@ func _physics_process(delta):
 		move_and_slide(velocity, Vector3(0, 1, 0), 0.05, 2, deg2rad(45))
 
 func _input(event):
-    if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-        neck.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY * -1))
-        rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-
-        var camera_rot = neck.rotation_degrees
-        camera_rot.x = clamp(camera_rot.x, -70, 70)
-        neck.rotation_degrees = camera_rot
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		neck.rotation.x = clamp(neck.rotation.x - MOUSE_SENSITIVITY * event.relative.y, -CAMERA_PITCH_LIMIT, CAMERA_PITCH_LIMIT)
+		rotate_y(-MOUSE_SENSITIVITY * event.relative.x)
