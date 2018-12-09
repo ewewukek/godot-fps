@@ -40,11 +40,11 @@ func _physics_process(delta):
 		velocity += acceleration * direction
 		var speed = Vector2(velocity.x, velocity.z).length()
 		if speed > max_velocity:
-			velocity -= (speed - max_velocity) * velocity
+			velocity = (max_velocity / speed) * velocity
 	else:
 		var speed = Vector2(velocity.x, velocity.z).length()
 		if speed > deceleration:
-			velocity -= deceleration * velocity
+			velocity -= (deceleration / speed) * velocity
 		else:
 			velocity.x = 0
 			velocity.z = 0
