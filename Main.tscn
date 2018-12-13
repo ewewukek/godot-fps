@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://DevHUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://stone_bricks.png" type="Texture" id=4]
+[ext_resource path="res://Obj.tscn" type="PackedScene" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -66,7 +67,48 @@ size = Vector2( 64, 64 )
 subdivide_width = 0
 subdivide_depth = 0
 
-[node name="Main" type="Node"]
+[sub_resource type="GDScript" id=4]
+
+script/source = "extends Spatial
+
+#func _ready():
+#	global_translate(Vector3(1.0 / 60.0, 0.0, 0.0))
+
+func _process(delta):
+	global_translate(Vector3(delta, 0.0, 0.0))
+	if transform.origin.x > 2.5:
+		transform.origin.x -= 5
+"
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends Spatial
+
+var offset
+
+func _ready():
+	offset = OS.get_ticks_msec()
+
+func _process(delta):
+	var time = fmod((OS.get_ticks_msec() - offset) / 1000.0, 5.0)
+	transform.origin.x = -2.5 + time
+"
+
+[sub_resource type="GDScript" id=6]
+
+script/source = "extends Spatial
+
+var offset
+
+func _ready():
+	offset = OS.get_ticks_usec()
+
+func _process(delta):
+	var time = fmod((OS.get_ticks_usec() - offset) / 1000000.0, 5.0)
+	transform.origin.x = -2.5 + time
+"
+
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -91,5 +133,33 @@ mesh = SubResource( 2 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform", "material" ]
+
+[node name="Obj_simple_delta" parent="World" index="1" instance=ExtResource( 5 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.65, -2.5 )
+script = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Obj_ticks_msec" parent="World" index="2" instance=ExtResource( 5 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.05, -2.5 )
+script = SubResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Obj_ticks_usec" parent="World" index="3" instance=ExtResource( 5 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.45, -2.5 )
+script = SubResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Obj4" parent="World" index="4" instance=ExtResource( 5 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.85, -2.5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Obj5" parent="World" index="5" instance=ExtResource( 5 )]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.25, -2.5 )
+_sections_unfolded = [ "Transform" ]
 
 
